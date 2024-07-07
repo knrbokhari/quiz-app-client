@@ -5,10 +5,11 @@ import * as yup from "yup";
 import Input from "../ui/Input";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useRegister } from "@/src/framework/rest/auth";
 
 // Define the form schema
 const schema = yup.object().shape({
-  username: yup.string().required("Username is required"),
+  full_name: yup.string().required("Username is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
   password: yup
     .string()
@@ -18,7 +19,7 @@ const schema = yup.object().shape({
 
 // Define the form values type
 interface IFormInputs {
-  username: string;
+  full_name: string;
   email: string;
   password: string;
 }
@@ -32,9 +33,10 @@ const RegisterForm: React.FC = () => {
   } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
   });
+  const { mutate, isLoading } = useRegister();
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
-    console.log(data);
+    mutate(data);
   };
 
   return (
@@ -43,10 +45,10 @@ const RegisterForm: React.FC = () => {
         <div>
           <Input
             label="Username"
-            {...register("username")}
+            {...register("full_name")}
             variant="outline"
             className="mb-5"
-            error={errors.username?.message!}
+            error={errors.full_name?.message!}
           />
         </div>
 

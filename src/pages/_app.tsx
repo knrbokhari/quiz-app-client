@@ -3,6 +3,8 @@ import PrivateRoute from "../lib/private-route";
 import { AppProps } from "next/app";
 import { NextPage } from "next";
 import { ReactElement, ReactNode } from "react";
+import { ToastContainer } from "react-toastify";
+import QueryProvider from "../framework/rest/client/query-provider";
 
 type NextPageWithLayout<P = {}> = NextPage<P> & {
   authenticationRequired?: boolean;
@@ -19,11 +21,14 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <>
-      {authenticationRequired ? (
-        <PrivateRoute>{getLayout(<Component {...pageProps} />)}</PrivateRoute>
-      ) : (
-        getLayout(<Component {...pageProps} />)
-      )}
+      <QueryProvider pageProps={pageProps}>
+        {authenticationRequired ? (
+          <PrivateRoute>{getLayout(<Component {...pageProps} />)}</PrivateRoute>
+        ) : (
+          getLayout(<Component {...pageProps} />)
+        )}
+        <ToastContainer autoClose={2000} theme="colored" />
+      </QueryProvider>
     </>
   );
 }

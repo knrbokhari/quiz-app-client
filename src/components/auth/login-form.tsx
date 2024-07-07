@@ -5,6 +5,7 @@ import * as yup from "yup";
 import Input from "../ui/Input";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useLogin } from "@/src/framework/rest/auth";
 
 // Define the form schema
 const schema = yup.object().shape({
@@ -30,9 +31,10 @@ const LoginForm: React.FC = () => {
   } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
   });
+  const { mutate: login, isLoading } = useLogin();
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
-    console.log(data);
+    login(data);
   };
 
   return (
