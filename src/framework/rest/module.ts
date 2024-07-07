@@ -12,7 +12,7 @@ export function useModuleList() {
     }
   );
 
-  return { data, isLoading, error };
+  return { data: data?.details, isLoading, error };
 }
 
 export function useModule(id: string) {
