@@ -44,7 +44,7 @@ const SingleQuiz = () => {
               Your score: {score} / {data.question.length}
             </p>
             <div className="mt-4">
-              {data.question.map((q, index) => (
+              {data.question.map((q: any, index: any) => (
                 <div key={q._id} className="mb-4">
                   <h3 className="font-semibold">{q.question}</h3>
                   <p>
@@ -67,20 +67,22 @@ const SingleQuiz = () => {
               {data.question[currentQuestion].question}
             </h2>
             <ul>
-              {data.question[currentQuestion].options.map((option, index) => (
-                <li key={option._id}>
-                  <button
-                    onClick={() => handleOptionClick(index)}
-                    className={`block w-full p-2 my-2 rounded border ${
-                      selectedOption === index
-                        ? "bg-blue-500 text-white"
-                        : "bg-white text-black"
-                    }`}
-                  >
-                    Option {index + 1}: : {option.option}
-                  </button>
-                </li>
-              ))}
+              {data.question[currentQuestion].options.map(
+                (option: any, index: any) => (
+                  <li key={option._id}>
+                    <button
+                      onClick={() => handleOptionClick(index)}
+                      className={`block w-full p-2 my-2 rounded border ${
+                        selectedOption === index
+                          ? "bg-blue-500 text-white"
+                          : "bg-white text-black"
+                      }`}
+                    >
+                      Option {index + 1}: : {option.option}
+                    </button>
+                  </li>
+                )
+              )}
             </ul>
             <button
               onClick={handleNextQuestion}
