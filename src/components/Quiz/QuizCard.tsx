@@ -12,7 +12,7 @@ interface QuizCardProps {
 
 const QuizCard: React.FC<QuizCardProps> = ({ data }) => {
   return (
-    <Link href={data.slug}>
+    <Link href={`/quiz/${data.slug}`}>
       <div className="p-5 w-72 border rounded-md hover:border-sky-500">
         <h2 className="text-lg font-semibold">
           Topic: <span className="text-sky-500">{data.title}</span>

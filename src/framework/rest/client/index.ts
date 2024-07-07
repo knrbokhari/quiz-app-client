@@ -12,7 +12,7 @@ class Client {
 
   module = {
     all: () => HttpClient.get<any>("/module"),
-    module: (id: string) => HttpClient.get<any>(`/module/${id}`),
+    module: (input: any) => HttpClient.get<any>(`/module/${input}`),
   };
 }
 

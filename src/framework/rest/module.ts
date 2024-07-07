@@ -20,7 +20,7 @@ export function useModule(id: string) {
     client.module.module(id)
   );
   return {
-    product: data,
+    data: data?.details,
     isLoading,
     error,
   };
