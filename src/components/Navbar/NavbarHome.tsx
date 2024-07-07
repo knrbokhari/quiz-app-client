@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import NavLink from "../NavLink";
 
 const NavbarHome = () => {
   const [nav, setNav] = useState(false);
@@ -11,16 +12,16 @@ const NavbarHome = () => {
 
   // Array containing navigation items
   const navItems = [
-    { id: 1, text: "Home" },
-    { id: 2, text: "Quiz" },
-    { id: 3, text: "Blog" },
-    { id: 5, text: "Contact" },
+    { id: 1, text: "Home", href: "/" },
+    { id: 2, text: "Quiz", href: "/" },
+    { id: 3, text: "Blog", href: "/" },
+    { id: 4, text: "Contact", href: "/" },
+    { id: 5, text: "Login", href: "/login" },
   ];
 
   return (
     <div className=" bg-[#1D4645] ">
       <div className=" container flex justify-between items-center h-24 mx-auto px-4 text-white">
-        {/* Logo */}
         <h1 className="w-full text-3xl font-bold text-white m-4">
           <svg
             width="50"
@@ -42,7 +43,7 @@ const NavbarHome = () => {
               key={item.id}
               className="p-2 rounded-xl m-2 cursor-pointer duration-300 hover:text-white hover:font-semibold"
             >
-              {item.text}
+              <NavLink href={item.href} label={item.text} />
             </li>
           ))}
         </ul>
