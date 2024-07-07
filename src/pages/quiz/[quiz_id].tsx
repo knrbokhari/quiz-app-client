@@ -10,13 +10,13 @@ const SingleQuiz = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
-  const [userAnswers, setUserAnswers] = useState([]);
+  const [userAnswers, setUserAnswers] = useState<any>([]);
 
   if (isLoading) {
     return <p className="text-center my-7">Loading...</p>;
   }
 
-  const handleOptionClick = (index) => {
+  const handleOptionClick = (index: any) => {
     setSelectedOption(index);
   };
 
