@@ -1,3 +1,4 @@
+import { all } from "axios";
 import { HttpClient } from "./http-client";
 
 class Client {
@@ -7,6 +8,11 @@ class Client {
     login: (input: any) => HttpClient.post<any>("/users/login", input),
     register: (input: any) => HttpClient.post<any>("/users/register", input),
     logout: () => HttpClient.post<boolean>("/users", {}),
+  };
+
+  module = {
+    all: () => HttpClient.get<any>("/module"),
+    module: (id: string) => HttpClient.get<any>(`/module/${id}`),
   };
 }
 

@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import Loader from "../components/ui/loaders/spinner/spinner";
 import { useRouter } from "next/router";
+import { useUser } from "../framework/rest/auth";
 
 const PrivateRoute = ({ children }: any) => {
   const router = useRouter();
-  const { me, isAuthorized }: any = {}; // useUser();
+  const { me, isAuthorized } = useUser();
 
   useEffect(() => {
     if (!me && !isAuthorized) {
@@ -16,8 +17,7 @@ const PrivateRoute = ({ children }: any) => {
     return <>{children}</>;
   }
 
-  // Optional: You can return a loading spinner or a message while redirecting
-  return null;
+  return <Loader />;
 };
 
 export default PrivateRoute;

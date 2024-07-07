@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import NavLink from "../NavLink";
+import { useAtom } from "jotai";
+import { authorizationAtom } from "@/src/store/authorization-atom";
 
 const NavbarHome = () => {
   const [nav, setNav] = useState(false);
+  const [isAuthorize] = useAtom(authorizationAtom);
 
   // Toggle function for handle the navbar's display
   const handleNav = () => {
@@ -16,7 +19,9 @@ const NavbarHome = () => {
     { id: 2, text: "Quiz", href: "/" },
     { id: 3, text: "Blog", href: "/" },
     { id: 4, text: "Contact", href: "/" },
-    { id: 5, text: "Login", href: "/login" },
+    isAuthorize
+      ? { id: 5, text: "Logout", href: "/" }
+      : { id: 5, text: "Login", href: "/login" },
   ];
 
   return (

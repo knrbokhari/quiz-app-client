@@ -1,6 +1,6 @@
 import { useToken } from "@/src/lib/hooks/use-token";
 import { useAtom } from "jotai";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import client from "./client";
 import { authorizationAtom } from "@/src/store/authorization-atom";
@@ -75,4 +75,16 @@ export function useLogout() {
   return {
     mutate: handleLogout,
   };
+}
+
+export function useUser() {
+  const [isAuthorized] = useAtom(authorizationAtom);
+  const { data, isLoading, error } = useQuery(["/user/me"], client.users.me, {
+    enabled: isAuthorized,
+    onError: (err) => {
+      console.log(err);
+    },
+  });
+  //TODO: do some improvement here
+  return { me: data, isLoading, error, isAuthorized };
 }
